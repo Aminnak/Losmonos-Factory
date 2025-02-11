@@ -1,7 +1,7 @@
 <!-- Brief introduction about the company mentioned in three section -->
 <div class="bg-indigo-100 flex flex-col max-lg:px-6 max-lg:py-2 max-md:mx-1 px-8 py-4 m-4 max-md:mt-0 ">
     <h2 class="text-black font-serif text-2xl my-4">What is Losmonos?</h2>
-    <p class="mb-14 py-3 px-5 font-medium font-sans text-black rounded-lg shadow-2xl">
+    <p class="mb-8 py-3 px-5 font-medium font-sans text-black rounded-lg shadow-2xl">
 
         What is Losmonos?
         Losmonos is a pioneering company dedicated to innovation and excellence.
@@ -24,7 +24,7 @@
     <section class="flex gap-6 max-lg:flex-col mb-9">
         <div class="w-1/2 max-lg:w-full flex flex-col justify-between max-lg:space-y-6">
             <div>
-                <h2 class="font-semibold text-md border border-l-green-600 border-l-2 pl-1 mt-2 mb-3">Creativity</h2>
+                <h2 class="font-semibold text-md border-l-2 border-green-600  pl-1 mt-2 mb-3">Creativity</h2>
                 <p class="leading-7 font-serif">
                     Creativity is the essence of new ideas and innovation. It transforms simple thoughts
                     into remarkable concepts, shaping the way we see and experience the world.
@@ -53,7 +53,7 @@
     <section class="flex gap-6 max-lg:flex-col flex-row-reverse my-9">
         <div class="w-1/2 max-lg:w-full flex flex-col justify-between items-end max-lg:space-y-6">
             <div>
-                <h2 class="font-semibold text-md border border-l-green-600 border-l-2 pl-1 mt-2 mb-3">Working atmosphere</h2>
+                <h2 class="font-semibold text-md border-l-2 border-green-600 pl-1 mt-2 mb-3">Working atmosphere</h2>
                 <p class="leading-7 font-serif">
                     A positive working atmosphere encourages collaboration, creativity, and efficiency.
                     When people feel valued and supported, they perform at their best, bringing fresh
@@ -83,7 +83,7 @@
     <section class="flex gap-6 max-lg:flex-col mt-14">
         <div class="w-1/2 max-lg:w-full flex flex-col max-lg:space-y-6">
             <div>
-                <h2 class="font-semibold text-md border border-l-green-600 border-l-2 pl-1 mt-2 mb-3">Why us?</h2>
+                <h2 class="font-semibold text-md border-l-2 border-green-600  pl-1 mt-2 mb-3">Why us?</h2>
                 <p class="leading-7 lg:max-w-md font-serif">
                     We are committed to delivering quality, innovation, and excellence.
                     Our dedication to customer satisfaction ensures that every experience is seamless,
@@ -114,7 +114,7 @@
 </div>
 <!-- Product display -->
 <section class="flex flex-col space-y-6 px-10">
-    <h2 class="font-semibold text-md border border-l-green-600 border-l-2 pl-1 text-2xl">Our Products</h2>
+    <h2 class="font-semibold text-md border-l-green-600 border-l-2 pl-1 text-2xl">Our Products</h2>
     <div class="flex justify-between items-center space-x-3 overflow-x-auto scrollbar-hidden group overflow-hidden">
         @for (image of productImages; track $index) {
             <div class="flex flex-col space-y-4">
@@ -132,7 +132,7 @@
             </div>
         }
     </div>
-    <div class="flex justify-end w-full px-4 space-x-2 -mt-12 ">
+    <div class="flex justify-end w-full px-4 space-x-2  ">
         <p class="pt-1.5 font-bold">Scroll to view more product</p>
         <img src="icons/rightArrow.svg" alt="" srcset="" class="animate-pulse">
     </div>
@@ -168,4 +168,5 @@
             </div>
         }
     </div>
+    <app-footer></app-footer>
 </div>
