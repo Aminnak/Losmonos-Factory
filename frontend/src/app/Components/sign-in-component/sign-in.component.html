@@ -1,0 +1,114 @@
+<form [formGroup]="Form" class="bg-indigo-100 max-lg:px-6 max-lg:py-2 max-md:mx-1 px-8 md:py-4">
+    <div class="max-lg:hidden mb-5 font-mono"><h2 class="text-gray-900/8">Registration Form</h2></div>
+    <div class="flex flex-col lg:flex-row w-full gap-5 max-lg:space-y-[1rem]">
+            <div class="flex flex-col justify-center items-center gap-8 lg:w-1/2 space-y-1">
+                <div class="flex flex-col items-baseline w-full space-y-3 py-2">
+                    <label>Username *</label>
+                    <input formControlName="username" type="text"
+                        class="w-full lg:w-[100%] px-3 py-1.5 border rounded-xl
+                        border-gray-900/80  focus:outline-none focus:border-indigo-700
+                        focus:border-2" placeholder="testimony"
+                    >
+                    @if (Form.get('username')?.hasError && Form.get('username')?.touched) {
+                        @let username = Form.get('username');
+                        @if (username?.hasError('required')) {
+                            <p class="text-red-700 font-mono w-full text-left">Username is Required</p>
+                        }
+                        @else if(username?.hasError('minlength')) {
+                            <p class="text-red-700 font-mono w-full text-left">Username should be at least 8 letter</p>
+                        }
+                        @else if(username?.hasError('pattern')) {
+                            <p class="text-red-700 font-mono w-full text-left">Username should at least contain 5 Character</p>
+                        }
+                    }
+
+                </div>
+
+                <div class="flex flex-col  items-baseline w-full space-y-3">
+                    <label>Password *</label>
+                    <input formControlName="password" type="password"
+                        class="w-full lg:w-[70%] px-3 py-1.5 border rounded-xl border-gray-900/80
+                        focus:outline-none focus:border-indigo-700 focus:border-2"
+                        placeholder="******"
+                    >
+                    @if (Form.get('password')?.hasError && Form.get('password')?.touched) {
+                        @let password = Form.get('password');
+                        @if (password?.hasError('required')) {
+                            <p class="text-red-700 font-mono w-full text-left">Password is Required</p>
+                        }
+                        @else if (password?.hasError('passwordValidator')) {
+                            <p class="text-red-700 font-mono w-full text-left">The Password is not Strong enough</p>
+                        }
+                    }
+                </div>
+                <div class="flex flex-col items-baseline w-full space-y-3">
+                    <label>Confirm Password *</label>
+                    <input formControlName="confirmPassword" type="password"
+                        class="w-full lg:w-[70%] px-3 py-1.5 border rounded-xl
+                        border-gray-900/80  focus:outline-none focus:border-indigo-700
+                        focus:border-2" placeholder="******"
+                    >
+                    @if (Form.hasError('passError') && Form.get('confirmPassword')?.touched) {
+                        <p class="text-red-700 font-mono text-bold">Password and Confrim Password does'nt match</p>
+                    }
+                </div>
+            </div>
+
+
+            <div class="flex flex-col col justify-center items-center gap-8 lg:w-1/2 space-y-1">
+                <div class="flex flex-col items-baseline w-full space-y-3">
+                    <label>Email *</label>
+                    <input formControlName="email"
+                        class="w-full lg:w-full px-3 py-1.5 border rounded-xl
+                        border-gray-900/80 focus:outline-none focus:border-indigo-700
+                        focus:border-2" placeholder="admin@gmail.com" type="email"
+                    >
+                    @if (Form.get('email')?.hasError && Form.get('email')?.touched) {
+                        @let email = Form.get('email');
+                        @if (email?.hasError('required')) {
+                            <p class="text-red-700 font-mono w-full text-left">Email is Required</p>
+                        }
+                        @if (email?.hasError('email')) {
+                            <p class="text-red-700 font-mono w-full text-left">Invalid Email Address</p>
+                        }
+                    }
+                </div>
+                <div class="flex flex-col items-baseline w-full space-y-3">
+                    <label>Postal Code</label>
+                    <input formControlName="postalCode"
+                        class="w-full lg:w-2/5 px-3 py-1.5 border rounded-xl border-gray-900/80
+                        focus:outline-none focus:border-indigo-700
+                        focus:border-2" placeholder="012346789" type="tel"
+                    >
+                    @if (Form.get('postalCode')?.hasError('pattern') && Form.get('postalCode')?.touched) {
+                        <p class="text-red-700 font-mono w-full text-left">Postal Code must be 10 digits</p>
+                    }
+                </div>
+                <div class="flex flex-col items-baseline w-full space-y-3 align-baseline">
+                    <label>Phone number</label>
+                        <input formControlName="phoneNumber"
+                        class="w-full lg:w-[60%] px-3 py-1.5 border rounded-xl border-gray-900/80
+                        focus:outline-none focus:border-indigo-700
+                        focus:border-2" placeholder="09123456789" type="tel"
+                    >
+                    @if (Form.get('phoneNumber')?.hasError('pattern') && Form.get('phoneNumber')?.touched) {
+                        <p class="text-red-700 font-mono w-full text-left">Please enter a valid-Iranian Phone Number</p>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="w-full mt-6">
+            <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg
+                hover:shadow-xl
+                focus:ring-blue-300 active:scale-95 transition transform duration-200"
+                [class]="isSumbitActive ? 'hover:bg-blue-700' : '' " [disabled]="!isSumbitActive" [class.bg-gray-700]="!isSumbitActive">
+                 Submit
+            </button>
+        </div>
+
+
+        @if (Form.get('password')?.hasError('syntaxError')) {
+            <p class="text-red-800 font-mono">Error</p>
+        }
+    </form>
