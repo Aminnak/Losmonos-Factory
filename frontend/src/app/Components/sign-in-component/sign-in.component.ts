@@ -15,7 +15,7 @@ export class SignInComponent {
     constructor(private formBuilder : FormBuilder){
         this.Form = this.formBuilder.group(
             {
-            username : ['',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=(.*[A-Za-z]{4})[A-Za-z0-9])/)]],
+            fullName : ['',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=(.*[A-Za-z]{4})[A-Za-z0-9])/)]],
             password : ['',[Validators.required,passValidator]],
             confirmPassword : ['',[Validators.required]],
             postalCode : ['',[Validators.pattern(/^\d{10}$/)]],
