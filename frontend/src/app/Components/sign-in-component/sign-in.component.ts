@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
+import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule , FormBuilder ,FormGroup , Validators, AbstractControlOptions} from "@angular/forms";
 import { passValidator , passMatch} from '../../shared/Validations';
 @Component({
@@ -9,10 +10,10 @@ import { passValidator , passMatch} from '../../shared/Validations';
   styleUrl: './sign-in.component.css'
 })
 export class SignInComponent {
-    isSumbitActive = false
+    isSumbitActive = true;
+    response : any ;
     Form : FormGroup;
-    tempFormError :Boolean = false
-    constructor(private formBuilder : FormBuilder){
+    constructor(private formBuilder : FormBuilder , private http : HttpClient){
         this.Form = this.formBuilder.group(
             {
             fullName : ['',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=(.*[A-Za-z]{4})[A-Za-z0-9])/)]],
@@ -26,5 +27,19 @@ export class SignInComponent {
             validators : passMatch()
         } as AbstractControlOptions
     )
+    }
+
+
+    submitForm(){
+        const endpoint = 'http://localhost:8000/api/create-user/'
+        const tempObj = {
+            email : 'testAgmail.com',
+            full_name : 'test',
+            password : '@test'
+        }
+        this.http.post(endpoint,tempObj ).subscribe({
+            next: (res) => this.response = res,
+            error: (err) => console.error('Error:', err)
+          });
     }
 }
