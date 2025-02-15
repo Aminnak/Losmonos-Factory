@@ -1,9 +1,14 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from .models import CustomUser
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField(required=True)
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=CustomUser.objects.all(), message="This email is already taken.")]
+    )
     class Meta:
         model = CustomUser
         fields = [
