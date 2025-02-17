@@ -25,7 +25,7 @@ class CustomUserCreateView(CreateAPIView):
         refresh = self.perform_create(serializer)
 
         return Response({
-            'user': serializer.data,
+            'user': serializer.data['full_name'],
             'access': str(refresh.access_token),
             'refresh': str(refresh),
         }, status=status.HTTP_201_CREATED)

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule} from "@angular/router";
-import { FooterComponent } from "../footer/footer.component";
+import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +9,8 @@ import { FooterComponent } from "../footer/footer.component";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-    isSumbitActive = false
-    repeatCount = [1,2,3,4,5]
+    isSumbitActive : boolean = false
+
     productImages = [
         {name:'DJI Mavic 3',url : 'images/cameraPic1.jpg'},
         {name:'GoPro Hero12 Black',url : 'images/cameraPic2.jpg'},
