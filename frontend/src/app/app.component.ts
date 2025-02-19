@@ -2,8 +2,15 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { CommonModule } from "@angular/common";
 import { RouterOutlet , RouterModule ,Router , NavigationEnd} from '@angular/router';
 import { filter } from 'rxjs';
-import { UserStatusService } from './services/user-status.service.service';
+import { UserService } from './services/user.service';
 
+export interface user_data {
+    full_name : string,
+    email : string,
+    postal_code : string | null ,
+    telephone_number : string | null ,
+    is_active : boolean | null
+}
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet , RouterModule , CommonModule],
@@ -15,7 +22,7 @@ export class AppComponent implements OnInit{
     currentRoute : string = '';
     isVisible :boolean = false;
     isBtnActive :boolean = false;
-    userName : string | null= ''
+    user? : user_data
 
     // elements :
     @ViewChild('sidenav') sidenav! : ElementRef;
@@ -33,7 +40,7 @@ export class AppComponent implements OnInit{
 
     constructor(
         private router : Router,
-        private userStatus : UserStatusService,
+        private userDetail : UserService,
     ){}
 
     // hooks :
@@ -44,7 +51,7 @@ export class AppComponent implements OnInit{
             this.currentRoute = this.router.url
         })
 
-        this.userStatus.getIsLoggedIn$.subscribe(value => this.userName = value )
+        this.userDetail.getUser$.subscribe(value => this.user = value )
     }
 
 

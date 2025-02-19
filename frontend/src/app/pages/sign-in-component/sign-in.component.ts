@@ -3,8 +3,9 @@ import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule , FormBuilder ,FormGroup , Validators, AbstractControlOptions} from "@angular/forms";
 import { passValidator , confirmPassword} from '../../shared/Validations';
 import { RegistrationService } from '../../services/registration.service.service';
-import { UserStatusService } from '../../services/user-status.service.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { user_data } from '../../app.component';
 @Component({
   selector: 'app-sign-in',
   standalone: true,
@@ -14,23 +15,24 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit{
     // Properties :
-    isSumbitActive = true;
-    response : any ;
+    user? : user_data ;
     Form! : FormGroup;
-    userName : boolean = false ;
+
 
     constructor(
         private formBuilder : FormBuilder,
         private RegisterService : RegistrationService,
         private router : Router,
-        private userStatus : UserStatusService,
+        private userDetail : UserService,
     ){}
 
 
     ngOnInit(): void {
+        // Form data
+
         this.Form = this.formBuilder.group(
                 {
-                    full_name : ['',[Validators.required,Validators.minLength(4),Validators.pattern(/^(?=(.*[A-Za-z]{4})[A-Za-z0-9])/)]],
+                    full_name : ['',[Validators.required,Validators.minLength(4),Validators.pattern(/^(?=((.*[A-Za-z]){4})[A-Za-z0-9])/)]],
                     password : ['',[Validators.required,passValidator]],
                     confirm_password : ['',[Validators.required]],
                     postal_code : ['',[Validators.pattern(/^\d{10}$/)]],
@@ -48,10 +50,10 @@ export class SignInComponent implements OnInit{
         this.RegisterService.registerUser(formData)
             .subscribe ({
                 next : (res) => {
-                    console.log(res.refresh , res.access)
-                    this.userName = res.user
+                    this.user = res.user
+                    localStorage.setItem('access_token', res.access);
                     this.router.navigate(['/home'])
-                    this.userStatus.setIsLoggedIn = this.userName
+                    this.userDetail.setUser = this.user
 
                 },
                 error : (err) => {

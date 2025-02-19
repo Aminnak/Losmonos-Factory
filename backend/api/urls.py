@@ -1,8 +1,9 @@
 from django.urls import path
-from rest_framework_simplejwt import views as jwt_views
-from .views import CustomUserCreateView
+from .views import CustomUserCreateView ,RetrieveUserView , ListUserView
 
 
 urlpatterns = [
     path('register/' , CustomUserCreateView.as_view()),
+    path('user/<int:pk>' , RetrieveUserView.as_view()),
+    path('users/' , ListUserView.as_view()),
 ]

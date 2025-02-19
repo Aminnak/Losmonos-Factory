@@ -20,16 +20,12 @@
               </li>
         </ul>
         @if (currentRoute != '/sign-in') {
-            @if (userName != '' && userName != null) {
-                <div class="py-8 px-10">
-                    <a routerLink="/sign-in" class="bg-white text-xs py-1.5 px-[.9rem] rounded-full text-gray-800">test up</a>
-                </div>
-            }@else{
-                <div class="py-8 px-10">
-                    <a routerLink="/sign-in" class="bg-white text-xs py-1.5 px-[.9rem] rounded-full text-gray-800">Sign up</a>
-                </div>
-            }
 
+                <div class="py-8 px-10">
+                        <a routerLink="/sign-in" class="bg-white text-xs py-1.5 px-[.9rem] rounded-full text-gray-800">
+                            {{ (user?.full_name?.length ?? 0) > 0 ? user?.full_name : 'Sign Up' }}
+                        </a>
+                </div>
         }
     </div>
 </div>
@@ -46,7 +42,7 @@
                 </div>
                 <div #hamburgurMenu class="md:hidden z-50" (click)="isBtnActive = !isBtnActive ;isVisible = !isVisible" [ngClass]="{'fixed':isVisible ,'right-0':isVisible,'pr-7':isVisible}">
                     <button class="relative group">
-                    <div class="relative flex items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all bg-black ring-0 ring-gray-300 hover:ring-8  ring-opacity-30 duration-200 shadow-md" [class.r]="isBtnActive">
+                    <div class="relative flex items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all bg-black ring-0 ring-gray-300 hover:ring-8  ring-opacity-30 duration-200 shadow-md">
                         <div class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300  origin-center" [ngClass]="{ '-rotate-[45deg]': isBtnActive }">
                         <div class="bg-white h-[2px] w-1/2 rounded transform transition-all duration-300   origin-right delay-75 "   [ngClass]="{
                             'h-[2px]': !isBtnActive,
@@ -66,30 +62,25 @@
                     </button>
                 </div>
                 <ul class="max-md:hidden">
-                <li class="p-4">
-                    <a routerLink="/home">Home</a>
-                </li>
-                <li class="p-4">
-                    <a routerLink="/about">About</a>
-                </li>
-                <li class="p-4">
-                    <a routerLink="/services">Services</a>
-                </li>
-                <li class="p-4">
-                    <a routerLink="/contact">Contact us</a>
-                </li>
+                    <li class="p-4">
+                        <a routerLink="/home">Home</a>
+                    </li>
+                    <li class="p-4">
+                        <a routerLink="/about">About</a>
+                    </li>
+                    <li class="p-4">
+                        <a routerLink="/services">Services</a>
+                    </li>
+                    <li class="p-4">
+                        <a routerLink="/contact">Contact us</a>
+                    </li>
                 </ul>
                 @if (currentRoute != '/sign-in') {
-                    @if (userName != '' && userName != null) {
-                        <div class="max-lg:text-xs max-md:hidden text-sm">
-                            <a routerLink="/sign-in" class="bg-white px-4 py-1.5 max-lg:px-[.9rem] rounded-full text-gray-800">{{userName}}</a>
-                        </div>
-                    }@else{
-                        <div class="max-lg:text-xs max-md:hidden text-sm">
-                            <a routerLink="/sign-in" class="bg-white px-4 py-1.5 max-lg:px-[.9rem] rounded-full text-gray-800">Sign up</a>
-                        </div>
-                    }
-
+                    <div class="max-lg:text-xs max-md:hidden text-sm">
+                            <a routerLink="/sign-in" class="bg-white px-4 py-1.5 max-lg:px-[.9rem] rounded-full text-gray-800">
+                                {{ (user?.full_name?.length ?? 0) > 0 ? user?.full_name : 'Sign Up' }}
+                            </a>
+                    </div>
                 }
             </nav>
         </div>
