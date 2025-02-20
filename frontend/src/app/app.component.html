@@ -63,21 +63,21 @@
                 </div>
                 <ul class="max-md:hidden">
                     <li class="p-4">
-                        <a routerLink="/home">Home</a>
+                        <a routerLink="/home" class="hover:text-blue-500 hover:duration-300">Home</a>
                     </li>
                     <li class="p-4">
-                        <a routerLink="/about">About</a>
+                        <a routerLink="/about" class="hover:text-blue-500 hover:duration-300">About</a>
                     </li>
                     <li class="p-4">
-                        <a routerLink="/services">Services</a>
+                        <a routerLink="/services" class="hover:text-blue-500 hover:duration-300">Services</a>
                     </li>
                     <li class="p-4">
-                        <a routerLink="/contact">Contact us</a>
+                        <a routerLink="/contact" class="hover:text-blue-500 hover:duration-300">Contact us</a>
                     </li>
                 </ul>
                 @if (currentRoute != '/sign-in') {
                     <div class="max-lg:text-xs max-md:hidden text-sm">
-                            <a routerLink="/sign-in" class="bg-white px-4 py-1.5 max-lg:px-[.9rem] rounded-full text-gray-800">
+                            <a routerLink="/sign-in" class="bg-white px-4 py-1.5 max-lg:px-[.9rem] rounded-full text-gray-800 hover:text-gray-500 hover:duration-300 ease-in-out">
                                 {{ (user?.full_name?.length ?? 0) > 0 ? user?.full_name : 'Sign Up' }}
                             </a>
                     </div>
