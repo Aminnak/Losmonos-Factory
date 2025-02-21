@@ -98,7 +98,7 @@
             </div>
 
         </div>
-        <div class="w-full mt-6">
+        <div class="w-full my-6">
             <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg
                 hover:shadow-xl
                 focus:ring-blue-300 active:scale-95 transition transform duration-200"
@@ -106,10 +106,16 @@
                 (click)=submitForm()>
                  Submit
             </button>
+            @if (errorMsg) {
+                <p class="font-bold text-red-700">{{errorMsg}}</p>
+            }
         </div>
 
 
         @if (Form.get('password')?.hasError('syntaxError')) {
             <p class="text-rose-700 font-sans">Error</p>
         }
+
+
+        <button (click)="getUser()" class="bg-blue-500 text-white px-3 py-1.5 rounded-lg">get new token</button>
     </form>

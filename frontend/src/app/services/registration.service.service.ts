@@ -16,11 +16,7 @@ export class RegistrationService {
         return this.http.post(`${this.baseUrl}register/` , data)
     }
 
-
-    // getUserData(id : number): Observable<any> {
-    //     const token = localStorage.getItem('access_token');
-    //     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    //     return this.http.get(`${this.baseUrl}user/${id}`, { headers });
-    //   }
+    getUserInfo(){
+        return this.http.get(`${this.baseUrl}user/1`)
+    }
 }

@@ -4,6 +4,7 @@ import { ReactiveFormsModule , FormBuilder ,FormGroup , Validators, AbstractCont
 import { passValidator , confirmPassword} from '../../shared/Validations';
 import { RegistrationService } from '../../services/registration.service.service';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { user_data } from '../../app.component';
 @Component({
@@ -14,9 +15,9 @@ import { user_data } from '../../app.component';
   styleUrl: './sign-in.component.css'
 })
 export class SignInComponent implements OnInit{
-    // Properties :
     user? : user_data ;
     Form! : FormGroup;
+    errorMsg! : any ;
 
 
     constructor(
@@ -24,12 +25,11 @@ export class SignInComponent implements OnInit{
         private RegisterService : RegistrationService,
         private router : Router,
         private userDetail : UserService,
+        private authService : AuthService
     ){}
 
 
     ngOnInit(): void {
-        // Form data
-
         this.Form = this.formBuilder.group(
                 {
                     full_name : ['',[Validators.required,Validators.minLength(4),Validators.pattern(/^(?=((.*[A-Za-z]){4})[A-Za-z0-9])/)]],
@@ -50,16 +50,26 @@ export class SignInComponent implements OnInit{
         this.RegisterService.registerUser(formData)
             .subscribe ({
                 next : (res) => {
-                    this.user = res.user
-                    localStorage.setItem('access_token', res.access);
+                    this.userDetail.setUser = res.user
+                    this.authService.saveTokens(res.access , res.refresh)
                     this.router.navigate(['/home'])
-                    this.userDetail.setUser = this.user
-
                 },
                 error : (err) => {
-                    console.log(err)
+                    this.errorMsg = err.error.message
                 }
             })
 
     }
+
+    getUser() {
+        this.RegisterService.getUserInfo().subscribe({
+          next: (res) => {
+            console.log(res)
+          },
+          error: (err) => {
+            console.log(err , 'err from here')
+          }
+        });
+      }
+
 }

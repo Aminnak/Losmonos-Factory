@@ -14,9 +14,9 @@ export class UserService {
 
     })
 
-    getUser$ = this.user.asObservable()
-
     constructor() { }
+
+    getUser$ = this.user.asObservable()
 
     set setUser(status : any) {
         this.user.next(status)
