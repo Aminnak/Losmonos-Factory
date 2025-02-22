@@ -6,7 +6,7 @@ import { Observable , tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl = 'http://localhost:8000/api/token/'
+    private baseUrl = 'http://localhost:8000/api/'
 
     constructor(private http : HttpClient) { }
 
@@ -25,8 +25,18 @@ export class AuthService {
         localStorage.setItem('refresh_token', refresh)
     }
 
+    createUser<T> (data : T) : Observable<any> {
+        return this.http.post(`${this.baseUrl}register/` , data)
+    }
+
+    loginUser(data : {email : string , passwrod : string}): Observable<{refresh : string, access : string}>{
+        return this.http.post<{refresh: string, access : string }>(`${this.baseUrl}login/` , data).pipe(
+            tap(token => this.saveTokens(token.access , token.refresh))
+        )
+    }
+
     refreshToken() : Observable<{access : string}> {
-        return this.http.post<{access : string}>(`${this.apiUrl}refresh/` , {
+        return this.http.post<{access : string}>(`${this.baseUrl}token/refresh/` , {
             refresh : this.getRefreshToken()
         }).pipe(
             tap((tokens) => {
@@ -38,6 +48,5 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        window.location.reload();
     }
 }

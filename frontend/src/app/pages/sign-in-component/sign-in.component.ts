@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule , FormBuilder ,FormGroup , Validators, AbstractControlOptions} from "@angular/forms";
 import { passValidator , confirmPassword} from '../../shared/Validations';
-import { RegistrationService } from '../../services/registration.service.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -22,7 +21,6 @@ export class SignInComponent implements OnInit{
 
     constructor(
         private formBuilder : FormBuilder,
-        private RegisterService : RegistrationService,
         private router : Router,
         private userDetail : UserService,
         private authService : AuthService
@@ -47,7 +45,7 @@ export class SignInComponent implements OnInit{
 
     submitForm(){
         const registerFormData = this.Form.value
-        this.RegisterService.registerUser(registerFormData)
+        this.authService.createUser(registerFormData)
             .subscribe ({
                 next : (res) => {
                     this.userDetail.setUser = res.user
@@ -60,16 +58,4 @@ export class SignInComponent implements OnInit{
             })
 
     }
-
-    getUser() {
-        this.RegisterService.getUserInfo().subscribe({
-          next: (res) => {
-            console.log(res)
-          },
-          error: (err) => {
-            console.log(err , 'err from here')
-          }
-        });
-      }
-
 }

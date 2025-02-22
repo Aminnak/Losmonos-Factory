@@ -3,7 +3,7 @@ import { HomeComponent } from "./pages/home-component/home.component";
 import { ServicesComponent } from './pages/service-component/services.component';
 import { SignInComponent } from './pages/sign-in-component/sign-in.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
-import { LogInComponent } from './pages/log-in/log-in.component';
+import { LogInComponent } from './pages/log-in/login.component';
 
 export const routes: Routes = [
     {path : '' , redirectTo : '/home' , pathMatch : 'full'},
