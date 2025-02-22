@@ -46,8 +46,8 @@ export class SignInComponent implements OnInit{
     }
 
     submitForm(){
-        const formData = this.Form.value
-        this.RegisterService.registerUser(formData)
+        const registerFormData = this.Form.value
+        this.RegisterService.registerUser(registerFormData)
             .subscribe ({
                 next : (res) => {
                     this.userDetail.setUser = res.user
