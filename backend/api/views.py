@@ -28,6 +28,7 @@ class CustomUserCreateView(CreateAPIView):
         }, status=status.HTTP_201_CREATED)
 
 
+
 class RetrieveUserView(RetrieveAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
