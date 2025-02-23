@@ -1,55 +1,151 @@
-<form [formGroup]="Form" class="bg-indigo-100 max-lg:px-6 max-lg:py-2 max-md:mx-1 px-8 md:py-4 h-screen">
-    <div class="max-lg:hidden mb-5 font-mono"><h2 class="text-gray-900">Registration Form</h2></div>
-    <div class="flex flex-col lg:flex-row w-full gap-5 max-lg:space-y-[1rem]">
-            <div class="flex flex-col justify-center items-center gap-6 lg:w-1/2 space-y-1">
-                <div class="flex flex-col items-baseline w-full space-y-3 py-2">
-                    <label>Full name *</label>
-                    <input formControlName="full_name" type="text"
-                        class="w-full lg:w-[100%] px-3 py-1.5 border rounded-xl
-                        border-gray-900/80  focus:outline-none focus:border-indigo-700
-                        focus:border-2" placeholder="testimony"
+<form
+    [formGroup]="Form"
+    class="
+        bg-indigo-100 max-lg:px-6
+        max-lg:py-2 max-md:mx-1
+        px-8 md:py-4 h-screen"
+>
+    <div class="max-lg:hidden mb-5 font-mono">
+        <h2 class="text-gray-900">
+            Registration Form
+        </h2>
+    </div>
+    <div class="
+        flex flex-col lg:flex-row
+        w-full gap-5 max-lg:space-y-[1rem]"
+    >
+            <div class="
+                flex flex-col justify-center
+                items-center gap-6 lg:w-1/2 space-y-1"
+            >
+                <div class="
+                    flex flex-col items-baseline
+                    w-full space-y-3 py-2"
+                >
+                    <label>
+                        Full name *
+                    </label>
+                    <input
+                        formControlName="full_name"
+                        placeholder="testimony"
+                        type="text"
+                        class="
+                            w-full lg:w-[100%] px-3 py-1.5
+                            rounded-xl border-gray-900/80
+                            focus:outline-none focus:border-indigo-700
+                            focus:border-2 border"
                     >
-                    @if (Form.get('full_name')?.hasError && Form.get('full_name')?.touched) {
+                    @if (
+                        Form.get('full_name')?.hasError &&
+                        Form.get('full_name')?.touched
+                    ) {
                         @let full_name = Form.get('full_name');
-                        @if (full_name?.hasError('required')) {
-                            <p class="text-rose-700 font-sans w-full text-left">Full name is Required</p>
+
+                        @if (full_name?.hasError('required') ) {
+                            <p
+                                class="
+                                    text-rose-700 font-sans
+                                    w-full text-left"
+                            >
+                                Full name is Required
+                            </p>
                         }
-                        @else if(full_name?.hasError('minlength')) {
-                            <p class="text-rose-700 font-sans w-full text-left">Full name should be at least 4 letter</p>
+                        @else if(full_name?.hasError('minlength') ) {
+                            <p
+                                class="
+                                    text-rose-700
+                                    font-sans w-full
+                                    text-left"
+                            >
+                                Full name should be
+                                at least 4 letter
+                            </p>
                         }
                         @else if(full_name?.hasError('pattern')) {
-                            <p class="text-rose-700 font-sans w-full text-left">Full name should at least contain 4 Character</p>
+                            <p
+                                class="
+                                    text-rose-700 font-sans
+                                    w-full text-left"
+                            >
+                                Full name should at least
+                                contain 4 Character
+                            </p>
                         }
                     }
 
                 </div>
 
-                <div class="flex flex-col  items-baseline w-full space-y-3">
-                    <label>Password *</label>
-                    <input formControlName="password" type="password"
-                        class="w-full lg:w-[70%] px-3 py-1.5 border rounded-xl border-gray-900/80
-                        focus:outline-none focus:border-indigo-700 focus:border-2"
+                <div class="flex flex-col items-baseline w-full space-y-3">
+                    <label>
+                        Password *
+                    </label>
+                    <input
+                        formControlName="password"
+                        type="password"
                         placeholder="******"
+                        class="
+                            w-full lg:w-[70%]
+                            px-3 py-1.5 border
+                            rounded-xl
+                            border-gray-900/80
+                            focus:outline-none
+                            focus:border-indigo-700
+                            focus:border-2"
                     >
-                    @if (Form.get('password')?.hasError && Form.get('password')?.touched) {
+                    @if (
+                        Form.get('password')?.hasError &&
+                        Form.get('password')?.touched
+                    ) {
                         @let password = Form.get('password');
-                        @if (password?.hasError('required')) {
-                            <p class="text-rose-700 font-sans w-full text-left">Password is Required</p>
+
+                        @if (password?.hasError('required') ) {
+                            <p
+                                class="
+                                    text-rose-700 font-sans
+                                    w-full text-left"
+                            >
+                                Password is Required
+                            </p>
                         }
-                        @else if (password?.hasError('passwordValidator')) {
-                            <p class="text-rose-700 font-sans w-full text-left">{{Form.get('password')?.getError('passwordValidator')}}</p>
+                        @else if (password?.hasError('passwordValidator') ) {
+                            <p
+                                class="
+                                    text-rose-700
+                                    font-sans w-full
+                                    text-left"
+                            >
+                                {{Form.get('password')?.getError('passwordValidator')}}
+                            </p>
                         }
                     }
                 </div>
                 <div class="flex flex-col items-baseline w-full space-y-3">
-                    <label>Confirm Password *</label>
-                    <input formControlName="confirm_password" type="password"
-                        class="w-full lg:w-[70%] px-3 py-1.5 border rounded-xl
-                        border-gray-900/80  focus:outline-none focus:border-indigo-700
-                        focus:border-2" placeholder="******"
+                    <label>
+                        Confirm Password *
+                    </label>
+                    <input
+                        formControlName="confirm_password"
+                        type="password"
+                        placeholder="******"
+                        class="
+                            w-full lg:w-[70%]
+                            px-3 py-1.5 border
+                            rounded-xl border-gray-900/80
+                            focus:outline-none
+                            focus:border-indigo-700
+                            focus:border-2"
                     >
-                    @if (Form.hasError('passError') && Form.get('confirm_password')?.touched) {
-                        <p class="text-red-700 font-sans text-bold">{{Form.getError('passError')}}</p>
+                    @if (
+                        Form.hasError('passError') &&
+                        Form.get('confirm_password')?.touched
+                    ) {
+                        <p
+                            class="
+                                text-red-700
+                                font-sans text-bold"
+                        >
+                            {{Form.getError('passError')}}
+                        </p>
                     }
                 </div>
             </div>
@@ -57,62 +153,139 @@
 
             <div class="flex flex-col col justify-center items-center gap-6 lg:w-1/2 space-y-1">
                 <div class="flex flex-col items-baseline w-full space-y-3">
-                    <label>Email *</label>
-                    <input formControlName="email"
-                        class="w-full lg:w-full px-3 py-1.5 border rounded-xl
-                        border-gray-900/80 focus:outline-none focus:border-indigo-700
-                        focus:border-2" placeholder="admin@gmail.com" type="email"
+                    <label>
+                        Email *
+                    </label>
+                    <input
+                        formControlName="email"
+                        type="email"
+                        placeholder="admin@gmail.com"
+                        class="
+                            w-full lg:w-full
+                            px-3 py-1.5 border
+                            rounded-xl border-gray-900/80
+                            focus:outline-none
+                            focus:border-indigo-700
+                            focus:border-2"
                     >
-                    @if (Form.get('email')?.hasError && Form.get('email')?.touched) {
+                    @if (
+                        Form.get('email')?.hasError &&
+                        Form.get('email')?.touched
+                    ) {
                         @let email = Form.get('email');
-                        @if (email?.hasError('required')) {
-                            <p class="text-rose-700 font-sans w-full text-left">Email is Required</p>
+
+                        @if (email?.hasError('required') ) {
+                            <p
+                                class="
+                                    text-rose-700
+                                    font-sans w-full
+                                    text-left"
+                            >
+                                Email is Required
+                            </p>
                         }
-                        @if (email?.hasError('email')) {
-                            <p class="text-rose-700 font-sans w-full text-left">Invalid Email Address</p>
+                        @if (email?.hasError('email') ) {
+                            <p class="
+                                text-rose-700
+                                font-sans w-full
+                                text-left"
+                            >
+                                Invalid Email Address
+                            </p>
                         }
                     }
                 </div>
                 <div class="flex flex-col items-baseline w-full space-y-3">
-                    <label>Postal Code</label>
-                    <input formControlName="postal_code"
-                        class="w-full lg:w-2/5 px-3 py-1.5 border rounded-xl border-gray-900/80
-                        focus:outline-none focus:border-indigo-700
-                        focus:border-2" placeholder="012346789" type="tel"
+                    <label>
+                        Postal Code
+                    </label>
+                    <input
+                        formControlName="postal_code"
+                        type="tel"
+                        placeholder="012346789"
+                        class="
+                            w-full lg:w-2/5 px-3
+                            py-1.5 border rounded-xl
+                            border-gray-900/80
+                            focus:outline-none
+                            focus:border-indigo-700
+                            focus:border-2"
                     >
-                    @if (Form.get('postal_code')?.hasError('pattern') && Form.get('postalCode')?.touched) {
-                        <p class="text-rose-700 font-sans w-full text-left">Postal Code must be 10 digits</p>
+                    @if (
+                        Form.get('postal_code')?.hasError('pattern') &&
+                        Form.get('postalCode')?.touched
+                    ) {
+                        <p class="
+                            text-rose-700
+                            font-sans w-full
+                            text-left"
+                        >
+                            Postal Code must be 10 digits
+                        </p>
                     }
                 </div>
                 <div class="flex flex-col items-baseline w-full space-y-3 align-baseline">
-                    <label>Phone number</label>
-                        <input formControlName="telephone_number"
-                        class="w-full lg:w-[60%] px-3 py-1.5 border rounded-xl border-gray-900/80
-                        focus:outline-none focus:border-indigo-700
-                        focus:border-2" placeholder="09123456789" type="tel"
+                    <label>
+                        Phone number
+                    </label>
+                    <input
+                        formControlName="telephone_number"
+                        type="tel"
+                        placeholder="09123456789"
+                        class="
+                            w-full lg:w-[60%] px-3
+                            py-1.5 border rounded-xl
+                            border-gray-900/80
+                            focus:outline-none
+                            focus:border-indigo-700
+                            focus:border-2"
                     >
-                    @if (Form.get('telephone_number')?.hasError('pattern') && Form.get('telephone_number')?.touched) {
-                        <p class="text-rose-700 font-sans w-full text-left">Please enter a valid-Iranian Phone Number</p>
+                    @if (
+                        Form.get('telephone_number')?.hasError('pattern') &&
+                        Form.get('telephone_number')?.touched
+                    ) {
+                        <p class="
+                            text-rose-700 font-sans
+                            w-full text-left"
+                        >
+                            Please enter a
+                            valid-Iranian Phone Number
+                        </p>
                     }
                 </div>
             </div>
 
         </div>
         <div class="w-full my-6">
-            <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg
-                hover:shadow-xl
-                focus:ring-blue-300 active:scale-95 transition transform duration-200"
-                [class]="Form.valid ? 'hover:bg-blue-700' : '' " [disabled]="!Form.valid" [class.bg-gray-700]="!Form.valid"
-                (click)=submitForm()>
-                 Submit
+            <button
+                (click)=submitForm()
+                [class.bg-gray-700]="!Form.valid"
+                [disabled]="!Form.valid"
+                [class]="
+                    Form.valid ? 'hover:bg-blue-700' : ''
+                "
+                class="
+                    bg-blue-600 text-white
+                    font-semibold py-2 px-4
+                    rounded-lg shadow-lg
+                    hover:shadow-xl
+                    focus:ring-blue-300 active:scale-95
+                    transition transform duration-200"
+
+                >
+                Submit
             </button>
             @if (errorMsg) {
-                <p class="font-bold text-red-700">{{errorMsg}}</p>
+                <p class="font-bold text-red-700">
+                    {{errorMsg}}
+                </p>
             }
         </div>
 
 
-        @if (Form.get('password')?.hasError('syntaxError')) {
-            <p class="text-rose-700 font-sans">Error</p>
+        @if (Form.get('password')?.hasError('syntaxError') ) {
+            <p class="text-rose-700 font-sans">
+                Error
+            </p>
         }
-    </form>
+</form>

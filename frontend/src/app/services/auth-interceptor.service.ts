@@ -27,31 +27,31 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
     );
 };
 
-    function handle401Error(req: HttpRequest<any>, next: HttpHandlerFn, authService: AuthService): Observable<HttpEvent<any>> {
-        if (!isRefreshing) {
-            isRefreshing = true;
-            refreshTokenSubject.next(null);
+function handle401Error(req: HttpRequest<any>, next: HttpHandlerFn, authService: AuthService): Observable<HttpEvent<any>> {
+    if (!isRefreshing) {
+        isRefreshing = true;
+        refreshTokenSubject.next(null);
 
-            return authService.refreshToken().pipe(
-                switchMap((token) => {
-                    isRefreshing = false;
-                    refreshTokenSubject.next(token.access);
+        return authService.refreshToken().pipe(
+            switchMap((token) => {
+                isRefreshing = false;
+                refreshTokenSubject.next(token.access);
 
-                    return next(req.clone({ setHeaders: { Authorization: `Bearer ${token.access}` } }));
-                }),
-                catchError((err) => {
-                    isRefreshing = false;
-                    authService.logout();
-                    return throwError(() => err)
-                })
-            );
-        } else {
-            return refreshTokenSubject.pipe(
-            filter((token) => token !== null),
-            take(1),
-            switchMap((token) =>
-                next(req.clone({ setHeaders: { Authorization: `Bearer ${token!}` } }))
-            )
-            );
-        }
+                return next(req.clone({ setHeaders: { Authorization: `Bearer ${token.access}` } }));
+            }),
+            catchError((err) => {
+                isRefreshing = false;
+                authService.logout();
+                return throwError(() => err)
+            })
+        );
+    } else {
+        return refreshTokenSubject.pipe(
+        filter((token) => token !== null),
+        take(1),
+        switchMap((token) =>
+            next(req.clone({ setHeaders: { Authorization: `Bearer ${token!}` } }))
+        )
+        );
     }
+}

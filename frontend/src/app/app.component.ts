@@ -18,18 +18,16 @@ export interface user_data {
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-    // properties :
     currentRoute : string = '';
     isVisible :boolean = false;
     isBtnActive :boolean = false;
     user? : user_data
 
-    // elements :
+
     @ViewChild('sidenav') sidenav! : ElementRef;
     @ViewChild('hamburgurMenu') hamburgurMenu! : ElementRef;
 
 
-    // host listeners :
     @HostListener('document:click' , ['$event'])
     sideNavOutsideClick(event : MouseEvent) : void{
         if (this.isVisible && !this.sidenav.nativeElement.contains(event.target) && !this.hamburgurMenu.nativeElement.contains(event.target)) {
@@ -43,7 +41,7 @@ export class AppComponent implements OnInit{
         private userDetail : UserService,
     ){}
 
-    // hooks :
+
     ngOnInit(): void {
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd)
