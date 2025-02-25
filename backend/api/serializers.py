@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from .models import CustomUser
+from .models import CustomUser , ProductDetail
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -28,3 +28,21 @@ class CustomUserSerializer(serializers.ModelSerializer):
     def create(self , validated_data):
         user = CustomUser.objects.create_user(**validated_data)
         return user
+
+
+class ProductDeatailSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        request = self.context.get('request')  # Get the request object
+        if obj.image:
+            return request.build_absolute_uri(f"/api{obj.image.url}")  # Add '/api' before the image URL
+        return None
+    class Meta:
+        model = ProductDetail
+        fields = ['id' , 'title' , 'price' , 'image']
+        extra_kwargs = {
+            'title': {'required': True},
+            'price': {'required': True},
+            'image': {'required': True,'use_url': True}
+        }

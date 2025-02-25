@@ -1,11 +1,15 @@
+import os
+from django.conf import settings
+from django.http import FileResponse, Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny , IsAuthenticated
 from rest_framework.generics import CreateAPIView , RetrieveAPIView , ListAPIView
+from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .models import CustomUser
-from .serializers import CustomUserSerializer
+from .models import CustomUser , ProductDetail
+from .serializers import CustomUserSerializer , ProductDeatailSerializer
 
 class CustomUserCreateView(CreateAPIView):
     queryset = CustomUser.objects.all()
@@ -48,5 +52,14 @@ class ListUserView(ListAPIView):
     '''
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+class ProductListView(ListAPIView):
+    '''
+        just for developement purpose
+    '''
+    queryset = ProductDetail.objects.all()
+    serializer_class = ProductDeatailSerializer
     authentication_classes = []
     permission_classes = [AllowAny]

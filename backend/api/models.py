@@ -35,3 +35,14 @@ class CustomUser(AbstractBaseUser , PermissionsMixin):
 
     def __str__(self):
         return str(self.email)
+
+
+class ProductDetail(models.Model):
+    title = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10 , decimal_places=2)
+    image = models.ImageField(upload_to='product_images/')
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return str(self.title)
