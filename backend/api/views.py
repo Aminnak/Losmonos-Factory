@@ -63,3 +63,6 @@ class ProductListView(ListAPIView):
     serializer_class = ProductDeatailSerializer
     authentication_classes = []
     permission_classes = [AllowAny]
+
+
+
