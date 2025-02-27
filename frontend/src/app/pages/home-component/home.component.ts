@@ -15,7 +15,7 @@ export class HomeComponent {
         {name:'DJI Mavic 3',url : 'images/cameraPic1.jpg'},
         {name:'GoPro Hero12 Black',url : 'images/cameraPic2.jpg'},
         {name:'Canon EOS R5',url : 'images/cameraPic3.jpg'},
-        {name:'Sony RX100 VII ',url : 'images/far-looking-factory.jpg'},
+        {name:'Sony RX100 VII ',url : 'images/cameraPic4.jpg'},
         {name:'Fujifilm X-T30 II',url : 'images/cameraPic5.jpg'},
     ]
 

@@ -22,7 +22,7 @@
                     flex flex-col items-baseline
                     w-full space-y-3 py-2"
                 >
-                    <label>
+                    <label class="font-semibold">
                         Full name *
                     </label>
                     <input
@@ -44,7 +44,7 @@
                         @if (full_name?.hasError('required') ) {
                             <p
                                 class="
-                                    text-rose-700 font-sans
+                                    text-rose-700 font-medium font-serif
                                     w-full text-left"
                             >
                                 Full name is Required
@@ -53,8 +53,8 @@
                         @else if(full_name?.hasError('minlength') ) {
                             <p
                                 class="
-                                    text-rose-700
-                                    font-sans w-full
+                                    text-rose-700 font-medium
+                                    font-serif w-full
                                     text-left"
                             >
                                 Full name should be
@@ -64,7 +64,7 @@
                         @else if(full_name?.hasError('pattern')) {
                             <p
                                 class="
-                                    text-rose-700 font-sans
+                                    text-rose-700 font-medium font-serif
                                     w-full text-left"
                             >
                                 Full name should at least
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="flex flex-col items-baseline w-full space-y-3">
-                    <label>
+                    <label class="font-semibold">
                         Password *
                     </label>
                     <input
@@ -101,7 +101,7 @@
                         @if (password?.hasError('required') ) {
                             <p
                                 class="
-                                    text-rose-700 font-sans
+                                    text-rose-700 font-medium font-serif
                                     w-full text-left"
                             >
                                 Password is Required
@@ -110,8 +110,8 @@
                         @else if (password?.hasError('passwordValidator') ) {
                             <p
                                 class="
-                                    text-rose-700
-                                    font-sans w-full
+                                    text-rose-700 font-medium
+                                    font-serif w-full
                                     text-left"
                             >
                                 {{Form.get('password')?.getError('passwordValidator')}}
@@ -120,7 +120,7 @@
                     }
                 </div>
                 <div class="flex flex-col items-baseline w-full space-y-3">
-                    <label>
+                    <label class="font-semibold">
                         Confirm Password *
                     </label>
                     <input
@@ -142,7 +142,7 @@
                         <p
                             class="
                                 text-red-700
-                                font-sans text-bold"
+                                font-serif text-bold"
                         >
                             {{Form.getError('passError')}}
                         </p>
@@ -153,7 +153,7 @@
 
             <div class="flex flex-col col justify-center items-center gap-6 lg:w-1/2 space-y-1">
                 <div class="flex flex-col items-baseline w-full space-y-3">
-                    <label>
+                    <label class="font-semibold">
                         Email *
                     </label>
                     <input
@@ -177,8 +177,8 @@
                         @if (email?.hasError('required') ) {
                             <p
                                 class="
-                                    text-rose-700
-                                    font-sans w-full
+                                    text-rose-700 font-medium
+                                    font-serif w-full
                                     text-left"
                             >
                                 Email is Required
@@ -186,8 +186,8 @@
                         }
                         @if (email?.hasError('email') ) {
                             <p class="
-                                text-rose-700
-                                font-sans w-full
+                                text-rose-700 font-medium
+                                font-serif w-full
                                 text-left"
                             >
                                 Invalid Email Address
@@ -196,7 +196,7 @@
                     }
                 </div>
                 <div class="flex flex-col items-baseline w-full space-y-3">
-                    <label>
+                    <label class="font-semibold">
                         Postal Code
                     </label>
                     <input
@@ -216,8 +216,8 @@
                         Form.get('postalCode')?.touched
                     ) {
                         <p class="
-                            text-rose-700
-                            font-sans w-full
+                            text-rose-700 font-medium
+                            font-serif w-full
                             text-left"
                         >
                             Postal Code must be 10 digits
@@ -225,7 +225,7 @@
                     }
                 </div>
                 <div class="flex flex-col items-baseline w-full space-y-3 align-baseline">
-                    <label>
+                    <label class="font-semibold">
                         Phone number
                     </label>
                     <input
@@ -245,7 +245,7 @@
                         Form.get('telephone_number')?.touched
                     ) {
                         <p class="
-                            text-rose-700 font-sans
+                            text-rose-700 font-medium font-serif
                             w-full text-left"
                         >
                             Please enter a
@@ -256,7 +256,7 @@
             </div>
 
         </div>
-        <div class="w-full my-6">
+        <div class="my-6">
             <button
                 (click)=submitForm()
                 [class.bg-gray-700]="!Form.valid"
@@ -275,17 +275,16 @@
                 >
                 Submit
             </button>
+            <p class="text-black py-2 font-normal">
+                Already have account?
+                <span routerLink="/login" class="hover:cursor-pointer text-blue-500 font-medium">
+                    Log In
+                </span>
+            </p>
             @if (errorMsg) {
                 <p class="font-bold text-red-700">
                     {{errorMsg}}
                 </p>
             }
         </div>
-
-
-        @if (Form.get('password')?.hasError('syntaxError') ) {
-            <p class="text-rose-700 font-sans">
-                Error
-            </p>
-        }
 </form>

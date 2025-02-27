@@ -4,12 +4,12 @@ import { ReactiveFormsModule , FormBuilder ,FormGroup , Validators, AbstractCont
 import { passValidator , confirmPassword} from '../../shared/Validations';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router , RouterModule } from '@angular/router';
 import { user_data } from '../../app.component';
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [ReactiveFormsModule , CommonModule],
+  imports: [ReactiveFormsModule , CommonModule , RouterModule],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
@@ -47,13 +47,12 @@ export class SignInComponent implements OnInit{
         const registerFormData = this.Form.value
         this.authService.createUser(registerFormData)
             .subscribe ({
-                next : (res) => {
-                    console.log(res.user)
+                next : res => {
                     this.userService.setUser(res.user)
                     this.authService.saveTokens(res.access , res.refresh)
                     this.router.navigate(['/home'])
                 },
-                error : (err) => {
+                error : err => {
                     this.errorMsg = err.error.message
                 }
             })
