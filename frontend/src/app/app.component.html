@@ -11,19 +11,19 @@
 >
     <div class="flex flex-col justify-between items-end h-full">
         <ul class="items-end text-white py-32 px-10 space-y-10">
-            <li>
+            <li class="hover:text-blue-500">
                 <a routerLink="/home">Home</a>
             </li>
 
-            <li>
+            <li class="hover:text-blue-500">
                 <a routerLink="/about">About</a>
             </li>
 
-            <li>
+            <li class="hover:text-blue-500">
                 <a routerLink="/services">Services</a>
             </li>
 
-            <li>
+            <li class="hover:text-blue-500">
                 <a routerLink="/contact">Contact us</a>
             </li>
         </ul>
@@ -38,7 +38,7 @@
                                 rounded-full
                                 text-gray-800"
                         >
-                            {{ (user?.full_name?.length ?? 0) > 0 ? user?.full_name : 'Sign Up' }}
+                            {{ !user?.isLoggedIn ? user?.full_name : 'Sign Up' }}
                         </a>
                 </div>
         }
@@ -134,7 +134,7 @@
                                     rounded-full text-gray-800
                                     hover:text-gray-500 hover:duration-300
                                     ease-in-out">
-                                    {{ (user?.full_name?.length ?? 0) > 0 ? user?.full_name : 'Sign Up' }}
+                                    {{ user?.isLoggedIn ? user?.full_name : 'Sign up'}}
                             </a>
                     </div>
                 }

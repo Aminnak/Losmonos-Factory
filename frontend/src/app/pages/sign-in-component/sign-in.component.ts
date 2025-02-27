@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit{
     constructor(
         private formBuilder : FormBuilder,
         private router : Router,
-        private userDetail : UserService,
+        private userService : UserService,
         private authService : AuthService
     ){}
 
@@ -48,7 +48,8 @@ export class SignInComponent implements OnInit{
         this.authService.createUser(registerFormData)
             .subscribe ({
                 next : (res) => {
-                    this.userDetail.setUser = res.user
+                    console.log(res.user)
+                    this.userService.setUser(res.user)
                     this.authService.saveTokens(res.access , res.refresh)
                     this.router.navigate(['/home'])
                 },

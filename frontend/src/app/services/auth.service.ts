@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable , tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { UserService } from './user.service';
+import { user_data } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,11 @@ import { Observable , tap } from 'rxjs';
 export class AuthService {
     private baseUrl = 'http://localhost:8000/api/'
 
-    constructor(private http : HttpClient) { }
+    constructor(
+        private http : HttpClient,
+        private router : Router,
+        private userServicee : UserService,
+    ) { }
 
     getAccessToken() : string | null {
         return localStorage.getItem('access_token')
@@ -19,7 +26,6 @@ export class AuthService {
         return localStorage.getItem('refresh_token')
     }
 
-
     saveTokens(access: string, refresh: string): void {
         localStorage.setItem('access_token', access)
         localStorage.setItem('refresh_token', refresh)
@@ -29,8 +35,8 @@ export class AuthService {
         return this.http.post(`${this.baseUrl}register/` , data)
     }
 
-    loginUser(data : {email : string , passwrod : string}): Observable<{refresh : string, access : string}>{
-        return this.http.post<{refresh: string, access : string }>(`${this.baseUrl}login/` , data).pipe(
+    loginUser<T>(data :T): Observable<any>{
+        return this.http.post<any>(`${this.baseUrl}login/` , data).pipe(
             tap(token => this.saveTokens(token.access , token.refresh))
         )
     }
@@ -48,5 +54,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
+        localStorage.removeItem('user');
+        this.router.navigate(['/login'])
     }
 }

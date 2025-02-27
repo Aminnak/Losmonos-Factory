@@ -9,7 +9,8 @@ export interface user_data {
     email : string,
     postal_code : string | null ,
     telephone_number : string | null ,
-    is_active : boolean | null
+    is_active : boolean | null ,
+    isLoggedIn : boolean
 }
 @Component({
   selector: 'app-root',

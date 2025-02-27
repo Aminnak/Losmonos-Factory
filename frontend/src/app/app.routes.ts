@@ -10,7 +10,7 @@ export const routes: Routes = [
     {path : 'home' , component : HomeComponent},
     {path : 'services' , component : ServicesComponent},
     {path : 'sign-in' , component : SignInComponent},
-    {path : 'log-in' , component : LogInComponent},
+    {path : 'login' , component : LogInComponent},
     {path : 'not-found' , component : NotfoundComponent},
     {path : '**' , redirectTo : '/not-found' ,pathMatch : 'full'},
 ];
