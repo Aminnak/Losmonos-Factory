@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule , FormBuilder ,FormGroup } from "@angular/forms";
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class LogInComponent implements OnInit{
     constructor(
         private formBuilder : FormBuilder,
         private authService : AuthService,
-        private Router : Router,
         private userService : UserService,
     ){}
 

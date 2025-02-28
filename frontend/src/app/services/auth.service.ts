@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable , tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { UserService } from './user.service';
-import { user_data } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +12,20 @@ export class AuthService {
     constructor(
         private http : HttpClient,
         private router : Router,
-        private userServicee : UserService,
     ) { }
 
     getAccessToken() : string | null {
-        return localStorage.getItem('access_token')
+        return sessionStorage.getItem('access_token')
     }
 
 
     getRefreshToken() : string | null {
-        return localStorage.getItem('refresh_token')
+        return sessionStorage.getItem('refresh_token')
     }
 
     saveTokens(access: string, refresh: string): void {
-        localStorage.setItem('access_token', access)
-        localStorage.setItem('refresh_token', refresh)
+        sessionStorage.setItem('access_token', access)
+        sessionStorage.setItem('refresh_token', refresh)
     }
 
     createUser<T> (data : T) : Observable<any> {
@@ -52,9 +49,9 @@ export class AuthService {
     }
 
     logout(): void {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('access_token');
+        sessionStorage.removeItem('refresh_token');
+        sessionStorage.removeItem('user');
         this.router.navigate(['/login'])
     }
 }

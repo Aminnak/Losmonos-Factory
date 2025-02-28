@@ -1,18 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule} from '@angular/router';
+import { ProductService } from '../../services/product.service';
+
 @Component({
   selector: 'app-services',
   imports: [RouterModule],
   templateUrl: './services.component.html',
   styleUrl: './services.component.css'
 })
-export class ServicesComponent {
-    repeatCount = [1,2,3,4,5]
-    images = [
-        'images/cameraPic1.jpg',
-        'images/cameraPic2.jpg',
-        'images/cameraPic3.jpg',
-        'images/cameraPic4.jpg',
-        'images/cameraPic5.jpg',
-    ]
+export class ServicesComponent implements OnInit{
+    products : Array<{
+        image : string
+        price : string
+        title : string
+    }> = []
+
+    constructor(
+        private productService : ProductService
+    ){}
+
+    ngOnInit(): void {
+        this.productService.getProducts()
+            .subscribe({
+                next : res => this.products = res ,
+                error : err => console.log(err)
+            })
+    }
 }
