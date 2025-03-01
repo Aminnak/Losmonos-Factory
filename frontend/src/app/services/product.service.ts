@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService{
-    private baseUrl = 'http://localhost:8000/api/'
+    private baseUrl = 'http://localhost:8000/api/products/'
 
     constructor(
         private http : HttpClient ,
     ) { }
 
-    getProducts() : Observable<any> {
-        return this.http.get(`${this.baseUrl}products/`)
+    getProducts(url : string = this.baseUrl) : Observable<any> {
+        return this.http.get(`${url}`)
     }
 }
