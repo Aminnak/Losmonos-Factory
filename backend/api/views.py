@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny , IsAuthenticated
 from rest_framework.generics import CreateAPIView , RetrieveAPIView , ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -13,6 +14,7 @@ from .serializers import (
 )
 
 class CustomUserCreateView(CreateAPIView):
+    '''create the new user'''
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     authentication_classes = []
@@ -33,8 +35,31 @@ class CustomUserCreateView(CreateAPIView):
         }, status=status.HTTP_201_CREATED)
 
 
+class CustomTokenObtainPairView(TokenObtainPairView):
+    '''
+    responsible for loging the user in
+    '''
+    serializer_class = CustomTokenObtainPairSerializer
+
+
+class CustomPagination(PageNumberPagination):
+    page_size = 20
+
+class ProductListView(ListAPIView):
+    '''
+        lists the product instances for frontend
+    '''
+    queryset = ProductDetail.objects.all()
+    serializer_class = ProductDeatailSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    pagination_class = CustomPagination
+
 
 class RetrieveUserView(RetrieveAPIView):
+    '''
+    just for developement purpose
+    '''
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     authentication_classes = [JWTAuthentication]
@@ -55,16 +80,3 @@ class ListUserView(ListAPIView):
     serializer_class = CustomUserSerializer
     authentication_classes = []
     permission_classes = [AllowAny]
-
-class ProductListView(ListAPIView):
-    '''
-        just for developement purpose
-    '''
-    queryset = ProductDetail.objects.all()
-    serializer_class = ProductDeatailSerializer
-    authentication_classes = []
-    permission_classes = [AllowAny]
-
-
-class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
