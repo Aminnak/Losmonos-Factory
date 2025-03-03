@@ -12,5 +12,5 @@ export const routes: Routes = [
     {path : 'sign-in' , component : SignInComponent},
     {path : 'login' , component : LogInComponent},
     {path : 'not-found' , component : NotfoundComponent},
-    {path : '**' , redirectTo : '/not-found' ,pathMatch : 'full'},
+    // {path : '**' , redirectTo : '/not-found' ,pathMatch : 'full'},
 ];

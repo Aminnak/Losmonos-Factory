@@ -54,4 +54,8 @@ export class AppComponent implements OnInit{
     }
 
 
+  navigate() {
+    this.router.navigate(['/home'], { fragment: 'footer' });
+  }
+
 }

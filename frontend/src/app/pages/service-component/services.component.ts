@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule} from '@angular/router';
+import { RouterModule  } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ProductService } from '../../services/product.service';
   templateUrl: './services.component.html',
   styleUrl: './services.component.css'
 })
-export class ServicesComponent implements OnInit{
+export class ServicesComponent implements OnInit {
     products : Array<{image : string,price : string ,title : string}> = []
     nextPage : string | null = null
     previousPage : string | null = null
