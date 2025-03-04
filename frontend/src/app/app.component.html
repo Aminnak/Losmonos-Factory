@@ -24,7 +24,7 @@
             </li>
 
             <li class="hover:text-blue-500 duration-300">
-                <a routerLink="/contact">Contact us</a>
+                <a routerLink="/contact" (click)="navigate()">Contact us</a>
             </li>
         </ul>
         @if (currentRoute != '/sign-in' && currentRoute != '/login') {
