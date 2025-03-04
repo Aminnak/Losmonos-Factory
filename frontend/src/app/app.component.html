@@ -11,19 +11,19 @@
 >
     <div class="flex flex-col justify-between items-end h-full">
         <ul class="items-end text-white py-32 px-10 space-y-10">
-            <li class="hover:text-blue-500">
+            <li class="hover:text-blue-500 duration-300">
                 <a routerLink="/home">Home</a>
             </li>
 
-            <li class="hover:text-blue-500">
+            <li class="hover:text-blue-500 duration-300">
                 <a routerLink="/about">About</a>
             </li>
 
-            <li class="hover:text-blue-500">
+            <li class="hover:text-blue-500 duration-300">
                 <a routerLink="/services">Services</a>
             </li>
 
-            <li class="hover:text-blue-500">
+            <li class="hover:text-blue-500 duration-300">
                 <a routerLink="/contact">Contact us</a>
             </li>
         </ul>
@@ -36,10 +36,10 @@
                             class="
                                 bg-white text-xs
                                 py-1.5 px-[.9rem]
-                                rounded-full
+                                rounded
                                 text-gray-800"
                         >
-                            {{ !user?.isLoggedIn ? user?.full_name : 'Sign Up' }}
+                            {{ user?.isLoggedIn ? user?.full_name : 'Sign up'}}
                         </a>
                 </div>
         }
@@ -47,102 +47,100 @@
 </div>
 
 <div class="md:grid md:grid-cols-12">
-    <div class="flex max-md:flex-col w-full md:col-span-2">
-        <div class="bg-black text-white md:w-1/6 md:fixed md:h-screen md:overflow-y-auto ">
-            <nav class="flex md:h-screen md:flex-col justify-between p-5 mx-2">
-                <div class="md:hidden">
-                    <div class="flex items-center">
-                        <img class="w-[40px]" src="icons/working-factory.png" alt="" >
-                        <span class="ml-2 pt-5">
-                            Losmonos company
-                        </span>
-                    </div>
+    <div class="md:col-span-2 bg-black text-white overflow-y-hidden">
+        <nav class="flex md:h-screen md:flex-col justify-between md:fixed max-md:w-full max-md:bg-black max-md:py-4 max-md:px-6">
+            <div class="md:hidden">
+                <div class="flex items-center">
+                    <img class="w-[40px]" src="icons/working-factory.png" alt="" >
+                    <span class="ml-2 pt-5">
+                        Losmonos company
+                    </span>
                 </div>
-                <div
-                    #hamburgurMenu
-                    (click)="isBtnActive = !isBtnActive ;isVisible = !isVisible"
-                    [ngClass]="{'fixed':isVisible ,'right-0':isVisible,'pr-7':isVisible}"
-                    class="md:hidden z-50"
+            </div>
+            <div
+                #hamburgurMenu
+                (click)="isBtnActive = !isBtnActive ;isVisible = !isVisible"
+                [ngClass]="{'fixed':isVisible ,'right-0':isVisible,'pr-7':isVisible}"
+                class="md:hidden z-50"
+            >
+                <button class="relative group">
+                <div class="
+                    relative flex items-center
+                    justify-center rounded-full
+                    w-[50px] h-[50px] transform
+                    transition-all bg-black ring-0
+                    ring-gray-300 hover:ring-8
+                    ring-opacity-30 duration-200
+                    shadow-md"
                 >
-                    <button class="relative group">
-                    <div class="
-                        relative flex items-center
-                        justify-center rounded-full
-                        w-[50px] h-[50px] transform
-                        transition-all bg-black ring-0
-                        ring-gray-300 hover:ring-8
-                        ring-opacity-30 duration-200
-                        shadow-md"
+                    <div
+                        [ngClass]="{ '-rotate-[45deg]': isBtnActive }"
+                        class="
+                            flex flex-col justify-between
+                            w-[20px] h-[20px] transform transition-all
+                            duration-300  origin-center"
                     >
+                        <div class="bg-white h-[2px] w-1/2 rounded transform transition-all duration-300   origin-right delay-75 "   [ngClass]="{
+                            'h-[2px]': !isBtnActive,
+                            '-translate-y-[1px]': isBtnActive,
+                            'h-[1px]': isBtnActive,
+                            '-rotate-90': isBtnActive
+                        }"></div>
+                        <div class="bg-white h-[1px] rounded"></div>
                         <div
-                            [ngClass]="{ '-rotate-[45deg]': isBtnActive }"
-                            class="
-                                flex flex-col justify-between
-                                w-[20px] h-[20px] transform transition-all
-                                duration-300  origin-center"
-                        >
-                            <div class="bg-white h-[2px] w-1/2 rounded transform transition-all duration-300   origin-right delay-75 "   [ngClass]="{
+                            [ngClass]="{
                                 'h-[2px]': !isBtnActive,
-                                '-translate-y-[1px]': isBtnActive,
+                                'translate-y-[1px]': isBtnActive,
                                 'h-[1px]': isBtnActive,
                                 '-rotate-90': isBtnActive
-                            }"></div>
-                            <div class="bg-white h-[1px] rounded"></div>
-                            <div
-                                [ngClass]="{
-                                    'h-[2px]': !isBtnActive,
-                                    'translate-y-[1px]': isBtnActive,
-                                    'h-[1px]': isBtnActive,
-                                    '-rotate-90': isBtnActive
-                                }"
-                                class="
-                                    bg-white h-[2px] w-1/2 rounded
-                                    self-end transform transition-all
-                                    duration-300 origin-left delay-75">
-                            </div>
+                            }"
+                            class="
+                                bg-white h-[2px] w-1/2 rounded
+                                self-end transform transition-all
+                                duration-300 origin-left delay-75">
                         </div>
                     </div>
-                    </button>
                 </div>
-                <ul class="max-md:hidden">
-                    <li class="p-4">
-                        <a routerLink="/home" class="hover:text-blue-500 hover:duration-300">
-                            Home
+                </button>
+            </div>
+            <ul class="max-md:hidden mt-4 w-full">
+                <li class="px-8 py-4">
+                    <a routerLink="/home" class="hover:text-blue-500 hover:duration-300">
+                        Home
+                    </a>
+                </li>
+                <li class="px-8 py-4">
+                    <a routerLink="/about" class="hover:text-blue-500 hover:duration-300">
+                        About
+                    </a>
+                </li>
+                <li class="px-8 py-4">
+                    <a routerLink="/services" class="hover:text-blue-500 hover:duration-300">
+                        Services
+                    </a>
+                </li>
+                <li class="px-8 py-4">
+                    <a (click)="navigate()" class="hover:text-blue-500 hover:duration-300">
+                        Contact us
+                    </a>
+                </li>
+            </ul>
+            @if (currentRoute != '/sign-in' && currentRoute != '/login') {
+                <div class="max-lg:text-xs max-md:hidden text-sm bg-slate-950 py-4 px-8">
+                        <a
+                            [routerLink]="user?.isLoggedIn ? '/profile' :  '/sign-in'"
+                            [class.bg-black]="user?.isLoggedIn"
+                            [class.text-blue-500]="user?.isLoggedIn"
+                            class="
+                                px-4 py-1.5 max-lg:px-[.9rem]
+                                rounded text-gray-800
+                                hover:text-gray-500 hover:duration-300
+                                ease-in-out bg-white">
+                                {{ user?.isLoggedIn ? user?.full_name : 'Sign up'}}
                         </a>
-                    </li>
-                    <li class="p-4">
-                        <a routerLink="/about" class="hover:text-blue-500 hover:duration-300">
-                            About
-                        </a>
-                    </li>
-                    <li class="p-4">
-                        <a routerLink="/services" class="hover:text-blue-500 hover:duration-300">
-                            Services
-                        </a>
-                    </li>
-                    <li class="p-4">
-                        <a (click)="navigate()" class="hover:text-blue-500 hover:duration-300">
-                            Contact us
-                        </a>
-                    </li>
-                </ul>
-                @if (currentRoute != '/sign-in' && currentRoute != '/login') {
-                    <div class="max-lg:text-xs max-md:hidden text-sm">
-                            <a
-                                [routerLink]="user?.isLoggedIn ? '/profile' :  '/sign-in'"
-                                [class.bg-black]="user?.isLoggedIn"
-                                [class.text-blue-500]="user?.isLoggedIn"
-                                class="
-                                    px-4 py-1.5 max-lg:px-[.9rem]
-                                    rounded-full text-gray-800
-                                    hover:text-gray-500 hover:duration-300
-                                    ease-in-out bg-white">
-                                    {{ user?.isLoggedIn ? user?.full_name : 'Sign up'}}
-                            </a>
-                    </div>
-                }
-            </nav>
-        </div>
+                </div>
+            }
+        </nav>
     </div>
     <div class="md:col-span-10 w-full bg-indigo-100">
         <router-outlet></router-outlet>
