@@ -1,16 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from "./pages/home-component/home.component";
-import { ServicesComponent } from './pages/service-component/services.component';
-import { SignInComponent } from './pages/sign-in-component/sign-in.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
-import { LogInComponent } from './pages/log-in/login.component';
 
 export const routes: Routes = [
     {path : '' , redirectTo : '/home' , pathMatch : 'full'},
-    {path : 'home' , component : HomeComponent},
-    {path : 'services' , component : ServicesComponent},
-    {path : 'sign-in' , component : SignInComponent},
-    {path : 'login' , component : LogInComponent},
+    {path : 'home' , loadComponent : () => import('./pages/home-component/home.component').then(m => m.HomeComponent)},
+    {path : 'services' , loadComponent : () => import('./pages/service-component/services.component').then(m => m.ServicesComponent)},
+    {path : 'sign-in' , loadComponent : () => import('./pages/sign-in-component/sign-in.component').then(m => m.SignInComponent)},
+    {path : 'login' , loadComponent : () => import('./pages/log-in/login.component').then(m => m.LogInComponent)},
     {path : 'not-found' , component : NotfoundComponent},
-    // {path : '**' , redirectTo : '/not-found' ,pathMatch : 'full'},
+    {path : '**' , redirectTo : '/not-found' ,pathMatch : 'full'},
 ];

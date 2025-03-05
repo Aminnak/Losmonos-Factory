@@ -31,7 +31,7 @@
                         type="text"
                         class="
                             w-full lg:w-[100%] px-3 py-1.5
-                            rounded-xl border-gray-900/80
+                            rounded-md border-gray-900/80
                             focus:outline-none focus:border-indigo-700
                             focus:border-2 border"
                     >
@@ -86,7 +86,7 @@
                         class="
                             w-full lg:w-[70%]
                             px-3 py-1.5 border
-                            rounded-xl
+                            rounded-lg
                             border-gray-900/80
                             focus:outline-none
                             focus:border-indigo-700
@@ -130,7 +130,7 @@
                         class="
                             w-full lg:w-[70%]
                             px-3 py-1.5 border
-                            rounded-xl border-gray-900/80
+                            rounded-lg border-gray-900/80
                             focus:outline-none
                             focus:border-indigo-700
                             focus:border-2"
@@ -163,7 +163,7 @@
                         class="
                             w-full lg:w-full
                             px-3 py-1.5 border
-                            rounded-xl border-gray-900/80
+                            rounded-lg border-gray-900/80
                             focus:outline-none
                             focus:border-indigo-700
                             focus:border-2"
@@ -205,7 +205,7 @@
                         placeholder="012346789"
                         class="
                             w-full lg:w-2/5 px-3
-                            py-1.5 border rounded-xl
+                            py-1.5 border rounded-lg
                             border-gray-900/80
                             focus:outline-none
                             focus:border-indigo-700
@@ -213,7 +213,7 @@
                     >
                     @if (
                         Form.get('postal_code')?.hasError('pattern') &&
-                        Form.get('postalCode')?.touched
+                        Form.get('postal_code')?.touched
                     ) {
                         <p class="
                             text-rose-700 font-medium
@@ -234,7 +234,7 @@
                         placeholder="09123456789"
                         class="
                             w-full lg:w-[60%] px-3
-                            py-1.5 border rounded-xl
+                            py-1.5 border rounded-lg
                             border-gray-900/80
                             focus:outline-none
                             focus:border-indigo-700
@@ -267,7 +267,7 @@
                 class="
                     bg-blue-600 text-white
                     font-semibold py-2 px-4
-                    rounded-lg shadow-lg
+                    rounded-md shadow-lg
                     hover:shadow-xl
                     focus:ring-blue-300 active:scale-95
                     transition transform duration-200"

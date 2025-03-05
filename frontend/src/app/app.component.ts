@@ -31,7 +31,11 @@ export class AppComponent implements OnInit{
 
     @HostListener('document:click' , ['$event'])
     sideNavOutsideClick(event : MouseEvent) : void{
-        if (this.isVisible && !this.sidenav.nativeElement.contains(event.target) && !this.hamburgurMenu.nativeElement.contains(event.target)) {
+        if (
+            this.isVisible && !this.sidenav.nativeElement.contains(event.target)
+            &&
+            !this.hamburgurMenu.nativeElement.contains(event.target)
+        ) {
             this.isVisible = !this.isVisible
             this.isBtnActive = !this.isBtnActive
         }
