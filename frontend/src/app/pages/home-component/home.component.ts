@@ -56,17 +56,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
-        ).subscribe(() => {
         const fragmentSubscription = this.route.fragment.pipe(take(1)).subscribe(fragment => {
             if (fragment) {
                 this.scrollToElement(fragment);
             }
         });
         this.subscriptions.push(fragmentSubscription)
-        })
-
     }
 
     ngOnDestroy(): void {
