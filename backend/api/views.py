@@ -1,4 +1,6 @@
 from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny , IsAuthenticated
 from rest_framework.generics import CreateAPIView , RetrieveAPIView , ListAPIView
@@ -34,6 +36,22 @@ class CustomUserCreateView(CreateAPIView):
             'refresh': str(refresh),
         }, status=status.HTTP_201_CREATED)
 
+class UpdateUserView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def patch(self , request , pk):
+        
+        if request.user.pk != pk:
+            raise PermissionDenied("You do not have permission to update this user.")
+
+        instance = CustomUser.objects.get(pk=pk)
+        serializer = CustomUserSerializer(instance , data=request.data , partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     '''
@@ -54,6 +72,9 @@ class ProductListView(ListAPIView):
     authentication_classes = []
     permission_classes = [AllowAny]
     pagination_class = CustomPagination
+
+
+
 
 
 class RetrieveUserView(RetrieveAPIView):

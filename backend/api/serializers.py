@@ -18,9 +18,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'password',
             'telephone_number',
             'postal_code',
-            'is_active'
+            'is_active',
+            'date_joined'
         ]
         extra_kwargs = {
+            'date_joined' : {'read_only' : True},
             'is_active': {'read_only': True},
             'password' : {'write_only' : True}
         }
@@ -53,10 +55,12 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
 
         data["user"] = {
+            'pk' :self.user.pk,
             'full_name' : self.user.full_name,
             'email' : self.user.email,
             'postal_code' :  self.user.postal_code if self.user.postal_code else None ,
-            'telephone_number' : self.user.telephone_number if self.user.postal_code else None
+            'telephone_number' : self.user.telephone_number if self.user.postal_code else None ,
+            'date_joined' : self.user.date_joined
         }
 
         return data

@@ -8,14 +8,16 @@ from .views import (
     ListUserView,
     ProductListView,
     CustomTokenObtainPairView,
+    UpdateUserView
 )
 
 urlpatterns = [
     path('token/refresh/' , TokenRefreshView.as_view()),
     path('register/' , CustomUserCreateView.as_view()),
     path('login/' , CustomTokenObtainPairView.as_view()),
+    path('user/<int:pk>/update/' , UpdateUserView.as_view()),
     path('users/' , ListUserView.as_view()),
-    path('user/<int:pk>' , RetrieveUserView.as_view()), # just for test
+    path('user/' , RetrieveUserView.as_view()), # just for test
     path('products/' , ProductListView.as_view()),
 ]
 
