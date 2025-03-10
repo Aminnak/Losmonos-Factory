@@ -1,4 +1,4 @@
-<form class="flex flex-col h-screen w-full bg-[url('/background.jpeg')] bg-cover bg-center justify-center items-center">
+<form [formGroup]="putForm" class="flex flex-col h-screen w-full bg-[url('/background.jpeg')] bg-cover bg-center justify-center items-center">
     <div class="
         flex flex-col items-center justify-between
         w-4/6 h-[600px] bg-black max-md:w-7/9
@@ -16,18 +16,18 @@
             </div>
             <div class="flex flex-col w-full space-y-1 ">
                 <div class="flex items-center ml-6 text-white space-x-4">
-                    <h2 class="font-semibold text-xl">Ammar Foley</h2>
+                    <h2 class="font-semibold text-xl">{{user.full_name}}</h2>
                     <div class="flex items-center space-x-1.5 text-sm h-[20px] border border-gray-600 px-3 rounded">
                         <div class="w-[5px] h-[5px] bg-emerald-600 rounded-full"></div>
                         <span class="text-gray-500 font-normal">active</span>
                     </div>
                 </div>
-                <h3 class="text-neutral-500/70 ml-6 font-medium">aminamirikeivani&#64;gmail.com</h3>
+                <h3 class="text-neutral-500/70 ml-6 font-medium">{{user.email}}</h3>
             </div>
             <div class="flex w-full items-center text-white mt-6">
                 <div class="flex flex-col pr-4 border-r-2 ml-6 border-gray-700/45 space-y-1">
                     <h3 class="text-neutral-500">Date joined</h3>
-                    <h4>2025-03-08T12</h4>
+                    <h4>{{user.date_joined}}</h4>
                 </div>
                 <div class="flex flex-col pr-4 ml-5 border-r-2 border-gray-700/45 space-y-1">
                     <h3 class="text-neutral-500">Spent</h3>
@@ -40,29 +40,87 @@
             </div>
             <div class="flex flex-col justify-start mt-8  w-full space-y-6">
                 <div class="flex justify-between ml-6 items-center">
-                    <input type="text" class="w-3/5 max-sm:w-5/7 py-1.5 text-gray-50 bg-stone-700 rounded-lg pl-3" placeholder="Phone">
-                    <!-- <button class="text-white bg-red-100 mr-6 px-6">hi</button> -->
-                    <span class="mr-6">
+                    <input formControlName="telephone_number" type="text" class="w-3/5 max-sm:w-5/7 py-1.5 outline-none text-gray-50 bg-stone-700 rounded-lg pl-3" placeholder="Phone">
+                    <span class="mr-6" (click)="toggleTelephone()">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
                             <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M36,5.00977c-1.7947,0 -3.58921,0.68037 -4.94922,2.04102l-22.13477,22.13281c-0.41998,0.41998 -0.72756,0.94226 -0.89062,1.51563l-2.9668,10.38867c-0.14899,0.52347 -0.00278,1.08658 0.38208,1.47144c0.38485,0.38485 0.94796,0.53107 1.47144,0.38208l10.39062,-2.9668c0.00065,-0.00065 0.0013,-0.0013 0.00195,-0.00195c0.56952,-0.16372 1.09052,-0.46748 1.51172,-0.88867l22.13281,-22.13476c2.72113,-2.72112 2.72113,-7.17731 0,-9.89844c-1.36001,-1.36064 -3.15452,-2.04102 -4.94922,-2.04102zM36,7.99219c1.0208,0 2.04018,0.39333 2.82617,1.17969c0.00065,0 0.0013,0 0.00195,0c1.57487,1.57488 1.57487,4.08137 0,5.65625l-1.93945,1.93945l-5.65625,-5.65625l1.93945,-1.93945c0.78599,-0.78636 1.80732,-1.17969 2.82813,-1.17969zM29.11133,13.23242l5.65625,5.65625l-18.07422,18.07422c-0.05863,0.05823 -0.13289,0.10283 -0.2168,0.12695l-7.79297,2.22656l2.22656,-7.79492c0,-0.00065 0,-0.0013 0,-0.00195c0.02293,-0.08063 0.06493,-0.15282 0.12695,-0.21484z"></path></g></g>
                         </svg>
                     </span>
                 </div>
+                @if (
+                        putForm.get('telephone_number')?.hasError('pattern') &&
+                        putForm.get('telephone_number')?.touched
+                    ) {
+                        <p class="
+                            text-rose-700 err mt-[-.9rem]
+                            w-full text-left ml-6"
+                        >
+                            enter a
+                            valid-Iranian phone
+                        </p>
+                    }
                 <div class="flex justify-between ml-6">
-                    <input type="text" class="w-2/5 max-sm:w-3/5 py-1.5 text-gray-50 bg-stone-700 rounded-lg pl-3"  placeholder="Postal Code">
-                    <!-- <button class="text-white bg-red-100 mr-6 px-6">hi</button> -->
-                    <span class="mr-6">
+                    <input formControlName="postal_code" type="text" class="w-2/5 max-sm:w-3/5 py-1.5 outline-none text-gray-50 bg-stone-700 rounded-lg pl-3"  placeholder="Postal Code">
+                    <span class="mr-6" (click)="togglePostalCode()">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
-                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M36,5.00977c-1.7947,0 -3.58921,0.68037 -4.94922,2.04102l-22.13477,22.13281c-0.41998,0.41998 -0.72756,0.94226 -0.89062,1.51563l-2.9668,10.38867c-0.14899,0.52347 -0.00278,1.08658 0.38208,1.47144c0.38485,0.38485 0.94796,0.53107 1.47144,0.38208l10.39062,-2.9668c0.00065,-0.00065 0.0013,-0.0013 0.00195,-0.00195c0.56952,-0.16372 1.09052,-0.46748 1.51172,-0.88867l22.13281,-22.13476c2.72113,-2.72112 2.72113,-7.17731 0,-9.89844c-1.36001,-1.36064 -3.15452,-2.04102 -4.94922,-2.04102zM36,7.99219c1.0208,0 2.04018,0.39333 2.82617,1.17969c0.00065,0 0.0013,0 0.00195,0c1.57487,1.57488 1.57487,4.08137 0,5.65625l-1.93945,1.93945l-5.65625,-5.65625l1.93945,-1.93945c0.78599,-0.78636 1.80732,-1.17969 2.82813,-1.17969zM29.11133,13.23242l5.65625,5.65625l-18.07422,18.07422c-0.05863,0.05823 -0.13289,0.10283 -0.2168,0.12695l-7.79297,2.22656l2.22656,-7.79492c0,-0.00065 0,-0.0013 0,-0.00195c0.02293,-0.08063 0.06493,-0.15282 0.12695,-0.21484z"></path></g></g>
+                            <g
+                                fill="#ffffff"
+                                fill-rule="nonzero"
+                                stroke="none"
+                                stroke-width="1"
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                stroke-miterlimit="10"
+                                stroke-dasharray=""
+                                stroke-dashoffset="0"
+                                font-family="none"
+                                font-weight="none"
+                                font-size="none"
+                                text-anchor="none"
+                                style="mix-blend-mode: normal">
+                            <g transform="scale(5.33333,5.33333)">
+                                <path
+                                    d="
+                                        M36,5.00977c-1.7947,0 -3.58921,0.68037
+                                        -4.94922,2.04102l-22.13477,22.13281c-0.41998,0.41998
+                                        -0.72756,0.94226 -0.89062,1.51563l-2.9668,10.38867c
+                                        -0.14899,0.52347 -0.00278,1.08658 0.38208,1.47144c0.38485,
+                                        0.38485 0.94796,0.53107 1.47144,0.38208l10.39062,-2.9668c0.00065,
+                                        -0.00065 0.0013,-0.0013 0.00195,-0.00195c0.56952,-0.16372 1.09052,
+                                        -0.46748 1.51172,-0.88867l22.13281,-22.13476c2.72113,-2.72112
+                                        2.72113,-7.17731 0,-9.89844c-1.36001,-1.36064 -3.15452,-2.04102
+                                        -4.94922,-2.04102zM36,7.99219c1.0208,0 2.04018,0.39333 2.82617,
+                                        1.17969c0.00065,0 0.0013,0 0.00195,0c1.57487,1.57488 1.57487,
+                                        4.08137 0,5.65625l-1.93945,1.93945l-5.65625,-5.65625l1.93945,
+                                        -1.93945c0.78599,-0.78636 1.80732,-1.17969 2.82813,
+                                        -1.17969zM29.11133,13.23242l5.65625,5.65625l-18.07422,
+                                        18.07422c-0.05863,0.05823 -0.13289,0.10283 -0.2168,0.12695l
+                                        -7.79297,2.22656l2.22656,-7.79492c0,-0.00065 0,-0.0013
+                                        0,-0.00195c0.02293,-0.08063 0.06493,-0.15282 0.12695,
+                                        -0.21484z">
+                                </path>
+                            </g>
+                            </g>
                         </svg>
                     </span>
                 </div>
+                @if (
+                    putForm.get('postal_code')?.hasError('pattern') &&
+                    putForm.get('postal_code')?.touched
+                ) {
+                    <p class="
+                        text-rose-700 err mt-[-.9rem]
+                        w-full text-left ml-6 transition-all transition-discrete "
+                    >
+                        postal code must be 10 digits
+                    </p>
+                }
             </div>
         </div>
         <div class="flex justify-end items-center w-full">
             <div class="flex space-x-3 pr-8 mb-2">
                 <button class="text-white bg-gray-700 py-2 px-3 rounded font-medium text-sm">Apply</button>
-                <button class="text-white bg-red-700 py-2 px-3 rounded font-medium text-sm">Log out</button>
+                <button class="text-white bg-red-700 py-2 px-3 rounded font-medium text-sm" (click)="logOut()">Log out</button>
             </div>
         </div>
     </div>

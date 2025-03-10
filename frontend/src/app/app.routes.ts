@@ -7,6 +7,7 @@ export const routes: Routes = [
     {path : 'services' , loadComponent : () => import('./pages/service-component/services.component').then(m => m.ServicesComponent)},
     {path : 'sign-in' , loadComponent : () => import('./pages/sign-in-component/sign-in.component').then(m => m.SignInComponent)},
     {path : 'login' , loadComponent : () => import('./pages/log-in/login.component').then(m => m.LogInComponent)},
+    {path : 'profile', loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent)},
     {path : 'not-found' , component : NotfoundComponent},
     {path : '**' , redirectTo : '/not-found' ,pathMatch : 'full'},
 ];

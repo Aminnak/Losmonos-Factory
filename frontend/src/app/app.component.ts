@@ -10,7 +10,8 @@ export interface user_data {
     postal_code : string | null ,
     telephone_number : string | null ,
     is_active : boolean | null ,
-    isLoggedIn : boolean
+    isLoggedIn : boolean,
+    date_joined : string | null,
 }
 @Component({
   selector: 'app-root',
