@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { FooterComponent } from '../../components/footer/footer.component';
-import { filter, Subscription, take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-home',

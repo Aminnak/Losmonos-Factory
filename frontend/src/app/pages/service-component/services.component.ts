@@ -16,9 +16,7 @@ export class ServicesComponent implements OnInit {
 
     isMoreActive = true
 
-    constructor(private productService : ProductService){
-        console.log('hello from service')
-    }
+    constructor(private productService : ProductService){}
 
     ngOnInit(): void {
         this.loadProducts()

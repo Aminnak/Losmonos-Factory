@@ -48,7 +48,6 @@ export class SignInComponent implements OnInit{
         this.authService.createUser(registerFormData)
             .subscribe ({
                 next : res => {
-                    console.log(res)
                     this.userService.setUser(res.user)
                     this.authService.saveTokens(res.access , res.refresh)
                     this.router.navigate(['/home'])

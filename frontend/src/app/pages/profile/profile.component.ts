@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule,DatePipe } from '@angular/common';
-import { ReactiveFormsModule , FormBuilder ,FormGroup , Validators, AbstractControlOptions} from "@angular/forms";
-import { UserService } from '../../services/user.service';
-import { user_data } from '../../app.component';
+import { ReactiveFormsModule , FormBuilder ,FormGroup , Validators} from "@angular/forms";
 import { AuthService } from '../../services/auth.service';
+import { getUserType } from '../../services/auth.service';
 
 
 @Component({
@@ -14,24 +13,35 @@ import { AuthService } from '../../services/auth.service';
   providers : [DatePipe]
 })
 export class ProfileComponent implements OnInit{
-    user! : user_data;
+    user? : getUserType;
     putForm! : FormGroup;
     telephoneInputDisable : boolean = true;
     postalCodeInputDsiable : boolean = true;
 
-    constructor(private userDetail : UserService , private dateP : DatePipe , private authService : AuthService , private formBuilder : FormBuilder){}
+    constructor(
+        private dateP : DatePipe ,
+        private authService : AuthService ,
+        private formBuilder : FormBuilder
+    ){}
 
     ngOnInit(): void {
-        this.userDetail.getUser$.subscribe(value => {
-            this.user = value
-            console.log(this.user.date_joined)
-            this.user.date_joined = this.dateP.transform(this.user.date_joined, 'fullDate');
+        this.putForm = this.formBuilder.group({
+            telephone_number : [{value : '', disabled : true},[Validators.pattern(/^09\d{9}$/)]],
+            postal_code : [{value : '', disabled : true},Validators.pattern(/^\d{10}$/)]
+        })
+        this.authService.getUser().subscribe({
+            next : res => {
+                this.user = res
+                this.user.date_joined = this.dateP.transform(this.user.date_joined, 'fullDate');
+                this.putForm.patchValue({
+                    telephone_number: this.user.telephone_number,
+                    postal_code: this.user.postal_code
+                });
+            },
+            error : err => console.log(err)
         })
 
-        this.putForm = this.formBuilder.group({
-            telephone_number : [{value : this.user.telephone_number ? this.user.telephone_number : ''  , disabled : true},[Validators.pattern(/^09\d{9}$/)]],
-            postal_code : [{value : this.user.postal_code ? this.user.postal_code : '' , disabled : true},Validators.pattern(/^\d{10}$/)]
-        })
+
     }
 
     toggleTelephone(){
@@ -54,6 +64,18 @@ export class ProfileComponent implements OnInit{
 
     logOut(){
         this.authService.logout()
+    }
+
+    apply(){
+        const updateValues = this.putForm.value
+        const userID = this.user?.pk
+        if (userID) {
+            this.authService.updateUserProfile(userID,updateValues).subscribe({
+                next : res => console.log(res),
+                error : err => console.log(err)
+            })
+        }
+
     }
 
 }

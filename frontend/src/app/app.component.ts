@@ -5,6 +5,7 @@ import { filter } from 'rxjs';
 import { UserService } from './services/user.service';
 
 export interface user_data {
+    pk : number ,
     full_name : string,
     email : string,
     postal_code : string | null ,

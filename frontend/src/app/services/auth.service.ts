@@ -3,6 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable , tap } from 'rxjs';
 import { Router } from '@angular/router';
 
+export interface getUserType {
+
+    date_joined : string | null,
+    email : string,
+    full_name : string,
+    is_active : boolean,
+    pk : number,
+    postal_code : string,
+    telephone_number : string
+
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +49,10 @@ export class AuthService {
         )
     }
 
+    getUser(): Observable<getUserType>{
+        return this.http.get<getUserType>(`${this.baseUrl}user/`)
+    }
+
     refreshToken() : Observable<{access : string}> {
         return this.http.post<{access : string}>(`${this.baseUrl}token/refresh/` , {
             refresh : this.getRefreshToken()
@@ -53,5 +68,9 @@ export class AuthService {
         sessionStorage.removeItem('refresh_token');
         sessionStorage.removeItem('user');
         this.router.navigate(['/login'])
+    }
+
+    updateUserProfile(pk : number, updatedData : object){
+        return this.http.patch(`${this.baseUrl}user/${pk}/update/` , updatedData)
     }
 }

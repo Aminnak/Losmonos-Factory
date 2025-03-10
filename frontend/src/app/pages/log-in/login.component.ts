@@ -30,7 +30,6 @@ export class LogInComponent implements OnInit{
     submitLogInForm(){
         this.authService.loginUser(this.logInForm.value).subscribe({
             next : res => {
-                console.log(res)
                 this.userService.setUser(res.user)
                 // this.Router.navigate(['/home'])
             },
