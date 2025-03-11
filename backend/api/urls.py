@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView , TokenVerifyView
 from .views import (
     CustomUserCreateView,
     RetrieveUserView,
@@ -13,6 +13,7 @@ from .views import (
 
 urlpatterns = [
     path('token/refresh/' , TokenRefreshView.as_view()),
+    path('token/verify/' , TokenVerifyView.as_view()),
     path('register/' , CustomUserCreateView.as_view()),
     path('login/' , CustomTokenObtainPairView.as_view()),
     path('user/<int:pk>/update/' , UpdateUserView.as_view()),

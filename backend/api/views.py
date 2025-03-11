@@ -41,7 +41,7 @@ class UpdateUserView(APIView):
     permission_classes = [IsAuthenticated]
 
     def patch(self , request , pk):
-        
+
         if request.user.pk != pk:
             raise PermissionDenied("You do not have permission to update this user.")
 
