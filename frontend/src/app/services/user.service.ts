@@ -11,9 +11,8 @@ export class UserService {
     getUser$ = this.user.asObservable()
 
     setUser(tempData: any): void {
-        const mainData = {
+        let mainData = {
             ...tempData ,
-            isLoggedIn : true
         }
         this.user.next(mainData);
         sessionStorage.setItem('user', JSON.stringify(mainData)); // Save to sessionStorage

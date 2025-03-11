@@ -39,7 +39,7 @@
                                 rounded
                                 text-gray-800"
                         >
-                            {{ user?.isLoggedIn ? user?.full_name : 'Sign up'}}
+                            {{ user?.full_name ? user?.full_name : 'Sign up'}}
                         </a>
                 </div>
         }
@@ -128,15 +128,15 @@
             @if (currentRoute != '/sign-in' && currentRoute != '/login') {
                 <div class="max-lg:text-xs max-md:hidden text-sm bg-slate-950 py-4 px-8">
                         <a
-                            [routerLink]="user?.isLoggedIn ? '/profile' :  '/sign-in'"
-                            [class.bg-black]="user?.isLoggedIn"
-                            [class.text-blue-500]="user?.isLoggedIn"
+                            [routerLink]="user?.full_name ? '/profile' :  '/sign-in'"
+                            [class.bg-black]="user?.full_name"
+                            [class.text-blue-500]="user?.full_name"
                             class="
                                 px-4 py-1.5 max-lg:px-[.9rem]
                                 rounded text-gray-800
                                 hover:text-gray-500 hover:duration-300
                                 ease-in-out bg-white">
-                                {{ user?.isLoggedIn ? user?.full_name : 'Sign up'}}
+                                {{ user?.full_name ? user?.full_name : 'Sign up'}}
                         </a>
                 </div>
             }

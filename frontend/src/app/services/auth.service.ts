@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable , tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 export interface getUserType {
 
@@ -23,6 +24,7 @@ export class AuthService {
     constructor(
         private http : HttpClient,
         private router : Router,
+        private userService : UserService
     ) { }
 
     getAccessToken() : string | null {
@@ -53,6 +55,12 @@ export class AuthService {
         return this.http.get<getUserType>(`${this.baseUrl}user/`)
     }
 
+    verifyUserToken() : Observable<any>{
+        return this.http.post(`${this.baseUrl}token/verify/` , {
+            token : this.getAccessToken()
+        })
+    }
+
     refreshToken() : Observable<{access : string}> {
         return this.http.post<{access : string}>(`${this.baseUrl}token/refresh/` , {
             refresh : this.getRefreshToken()
@@ -67,6 +75,7 @@ export class AuthService {
         sessionStorage.removeItem('access_token');
         sessionStorage.removeItem('refresh_token');
         sessionStorage.removeItem('user');
+        this.userService.setUser(false)
         this.router.navigate(['/login'])
     }
 

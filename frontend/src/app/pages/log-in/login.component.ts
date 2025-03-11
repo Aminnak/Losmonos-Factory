@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule , FormBuilder ,FormGroup } from "@angular/forms";
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
@@ -18,6 +18,7 @@ export class LogInComponent implements OnInit{
         private formBuilder : FormBuilder,
         private authService : AuthService,
         private userService : UserService,
+        private router : Router
     ){}
 
     ngOnInit(): void {
@@ -31,7 +32,7 @@ export class LogInComponent implements OnInit{
         this.authService.loginUser(this.logInForm.value).subscribe({
             next : res => {
                 this.userService.setUser(res.user)
-                // this.Router.navigate(['/home'])
+                this.router.navigate(['/home'])
             },
             error : err => console.log(err)
         })
